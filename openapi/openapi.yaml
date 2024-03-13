@@ -24,6 +24,7 @@ paths:
           in: query
           description: symbols
           schema:
+            uniqueItems: true
             type: array
             items:
               type: string
@@ -105,13 +106,15 @@ components:
         lines:
           type: array
           items:
-            $ref: "#/components/schemas/InvoiceLines"
+            $ref: "#/components/schemas/InvoiceLine"
+        empty:
+          type: boolean
     InvoiceContainer:
       type: object
       properties:
         invoice:
           $ref: "#/components/schemas/Invoice"
-    InvoiceLines:
+    InvoiceLine:
       type: object
       properties:
         description:

@@ -38,7 +38,8 @@ Once `/invoice/total` API has successful parse the request body, it should:
 
 - On Success (HTTP status code `200`): Invoice total in the base currency e.g. `1600.86`
 - On Error:
-  - Failed to parse request body (HTTP status code `400`): An appropriate error message prefixed with `Error: `
+  - Failed to fetch relevant exchange rate data (HTTP status code `404`): An appropriate error message prefixed with `Error: `
+  - Failed to parse request body, including invalid/missing required input (HTTP status code `400`): An appropriate error message prefixed with `Error: `
   - Failed to calculate total (HTTP status code `500`): An appropriate error message prefixed with `Error:`
 
 **Assumptions**
