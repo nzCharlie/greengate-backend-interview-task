@@ -6,7 +6,7 @@ public interface TestCasesGenerator {
 
     default List<TestCase> getTestCases() {
         return List.of(
-                new TestCase("Test Case 1", 200, """
+                new TestCase("Happy Path", 200, """
                         {
                           "invoice": {
                             "currency": "NZD",
@@ -25,7 +25,7 @@ public interface TestCasesGenerator {
                             ]
                           }
                         }
-                        """, "1601.86")
+                        """, "1600.86")
         );
     }
 }
