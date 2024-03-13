@@ -107,8 +107,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/InvoiceLine"
-        empty:
-          type: boolean
     InvoiceContainer:
       type: object
       properties:
