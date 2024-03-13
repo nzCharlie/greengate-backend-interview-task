@@ -1,0 +1,127 @@
+---
+openapi: 3.0.3
+info:
+  title: greengate-be-test API
+  version: 1.0.0-SNAPSHOT
+paths:
+  /exchange-rate/{date}:
+    get:
+      tags:
+        - Invoice Resource
+      parameters:
+        - name: date
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/LocalDate"
+        - name: base
+          in: query
+          description: Base currency
+          schema:
+            type: string
+          example: NZD
+        - name: symbols
+          in: query
+          description: symbols
+          schema:
+            type: array
+            items:
+              type: string
+          example: USD
+      responses:
+        "200":
+          description: Exchange rate response for the given date
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExchangeRateResult"
+              examples:
+                Example Exchange Rate:
+                  value:
+                    base: NZD
+                    date: 2020-07-07
+                    rates:
+                      AUD: 0.94212
+                      USD: 0.65411
+        "404":
+          description: Invalid date/symbol not supported by frankfurter.app
+          content:
+            plain/text: {}
+  /invoice/total:
+    post:
+      tags:
+        - Invoice Resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceContainer"
+            examples:
+              Example Invoice:
+                value:
+                  invoice:
+                    currency: NZD
+                    date: 2020-07-07
+                    lines:
+                      - description: Intel Core i9
+                        currency: USD
+                        amount: 700
+                      - description: ASUS ROG Strix
+                        currency: AUD
+                        amount: 500
+      responses:
+        "200":
+          description:
+            Calculate the total price of the invoice in the currency specified
+            in the invoice. Should be rounded according to instruction
+          content:
+            plain/text:
+              example: 1600.86
+        "400":
+          description: "Invalid invoice, e.g. missing date, currency"
+          content:
+            plain/text: {}
+components:
+  schemas:
+    ExchangeRateResult:
+      type: object
+      properties:
+        date:
+          $ref: "#/components/schemas/LocalDate"
+        base:
+          type: string
+        rates:
+          type: object
+          additionalProperties:
+            format: double
+            type: number
+    Invoice:
+      type: object
+      properties:
+        date:
+          $ref: "#/components/schemas/LocalDate"
+        currency:
+          type: string
+        lines:
+          type: array
+          items:
+            $ref: "#/components/schemas/InvoiceLines"
+    InvoiceContainer:
+      type: object
+      properties:
+        invoice:
+          $ref: "#/components/schemas/Invoice"
+    InvoiceLines:
+      type: object
+      properties:
+        description:
+          type: string
+        currency:
+          type: string
+        amount:
+          format: double
+          type: number
+    LocalDate:
+      format: date
+      type: string
+      example: 2022-03-10
