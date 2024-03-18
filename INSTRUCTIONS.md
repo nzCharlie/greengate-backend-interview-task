@@ -14,6 +14,8 @@ We will be using the supplied RestAssured tests found in `src/test/java/com/gree
 
 An OpenAPI specification has been provided to you in `openapi/openapi.yaml`. You are expected to implement the APIs according to the specification. It is advisable to make sure you understand your task by loading the specification in https://editor.swagger.io/.
 
+_Please note_: Feel free to utilise https://editor.swagger.io/ to generate code stubs, however only use it if you feel it will save time using it. We are more interested in your ability to implement the API than your ability to use the editor.
+
 **Additional Notes On /invoice/total endpoint**
 
 - The invoice date will be in the RFC3339 Internet date format e.g. `2020-07-27`
