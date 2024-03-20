@@ -32,11 +32,12 @@ public class MultiCurrencyInvoiceTest {
                 .body(postBody)
                 .contentType("application/json")
                 .baseUri(BASE_URL)
+                //.baseUri(BASE_URL)
                 .when()
                 .post(ENDPOINT)
                 .then()
                 .statusCode(statusCode)
-                .contentType("plain/text")
+                .contentType("text/plain")
                 .body(equalTo(expectedOutput));
     }
 }

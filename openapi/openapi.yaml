@@ -13,7 +13,7 @@ paths:
           in: path
           required: true
           schema:
-            $ref: "#/components/schemas/LocalDate"
+            $ref: '#/components/schemas/LocalDate'
         - name: base
           in: query
           description: Base currency
@@ -35,7 +35,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ExchangeRateResult"
+                $ref: '#/components/schemas/ExchangeRateResult'
               examples:
                 Example Exchange Rate:
                   value:
@@ -47,7 +47,7 @@ paths:
         "404":
           description: Invalid date/symbol not supported by frankfurter.app
           content:
-            plain/text: {}
+            text/plain: {}
   /invoice/total:
     post:
       tags:
@@ -56,7 +56,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/InvoiceContainer"
+              $ref: '#/components/schemas/InvoiceContainer'
             examples:
               Example Invoice:
                 value:
@@ -72,23 +72,22 @@ paths:
                         amount: 500
       responses:
         "200":
-          description:
-            Calculate the total price of the invoice in the currency specified
+          description: Calculate the total price of the invoice in the currency specified
             in the invoice. Should be rounded according to instruction
           content:
-            plain/text:
+            text/plain:
               example: 1600.86
         "400":
           description: "Invalid invoice, e.g. missing date, currency"
           content:
-            plain/text: {}
+            text/plain: {}
 components:
   schemas:
     ExchangeRateResult:
       type: object
       properties:
         date:
-          $ref: "#/components/schemas/LocalDate"
+          $ref: '#/components/schemas/LocalDate'
         base:
           type: string
         rates:
@@ -100,18 +99,18 @@ components:
       type: object
       properties:
         date:
-          $ref: "#/components/schemas/LocalDate"
+          $ref: '#/components/schemas/LocalDate'
         currency:
           type: string
         lines:
           type: array
           items:
-            $ref: "#/components/schemas/InvoiceLine"
+            $ref: '#/components/schemas/InvoiceLine'
     InvoiceContainer:
       type: object
       properties:
         invoice:
-          $ref: "#/components/schemas/Invoice"
+          $ref: '#/components/schemas/Invoice'
     InvoiceLine:
       type: object
       properties:
